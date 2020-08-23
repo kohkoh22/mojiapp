@@ -9,40 +9,40 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     .wrapper
-    .header
-      .header__contents
-        .appname
-          =link_to "/" do
-            文字る
-        .tabs
-          .tabs__new
-            NEW
-          .tabs__category
-            CATEGORY
-          .tabs__tags
-            TAG
-        .sns-links
-          .sns-links__facebook
-            %i.fab.fa-facebook.fa-lg
-          .sns-links__twitter
-            %i.fab.fa-twitter.fa-lg
-          .sns-links__instagram
-            %i.fab.fa-instagram.fa-lg
-        .search
-          %i.fas.fa-search.fa-2x
-        .logins
-          -if user_signed_in?
-            =link_to "マイページ", "/users/#{current_user.id}"
-            =link_to new_post_path do
-              %i.fas.fa-pencil-alt
+      .header
+        .header__contents
+          .appname
+            =link_to "/" do
               文字る
-            = link_to "ログアウト", destroy_user_session_path, method: :delete
-          -else
-            .logins__login
-              = link_to "ログイン", new_user_session_path, class: "post" 
-            .logins__signin
-              = link_to "新規登録", new_user_registration_path, class: "post"
-    .body
-      .body__contents
-        = yield
-      .footer
+          .tabs
+            .tabs__new
+              NEW
+            .tabs__category
+              CATEGORY
+            .tabs__tags
+              TAG
+          .sns-links
+            .sns-links__facebook
+              %i.fab.fa-facebook.fa-lg
+            .sns-links__twitter
+              %i.fab.fa-twitter.fa-lg
+            .sns-links__instagram
+              %i.fab.fa-instagram.fa-lg
+          .search
+            %i.fas.fa-search.fa-2x
+          .logins
+            -if user_signed_in?
+              =link_to "マイページ", "/users/#{current_user.id}"
+              =link_to new_post_path do
+                %i.fas.fa-pencil-alt
+                文字る
+              = link_to "ログアウト", destroy_user_session_path, method: :delete
+            -else
+              .logins__login
+                = link_to "ログイン", new_user_session_path, class: "post" 
+              .logins__signin
+                = link_to "新規登録", new_user_registration_path, class: "post"
+      .body
+        .body__contents
+          = yield
+        .footer

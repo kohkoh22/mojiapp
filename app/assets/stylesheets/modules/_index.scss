@@ -2,18 +2,18 @@
   box-sizing: border-box;
 }
 .wrapper{
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Hannotate SC',sans-serif;
 
 }
 .header{
   width: 100%;
   height: 56px;
-  background-color: #f5f5f5;
+  background-color: #FAF0E6;
   box-shadow : 0px 15px 20px #666666 ;
   position:relative;
   a{
     text-decoration: none;
-    color: black;
+    color:black ;
   }
   &__contents{
     width: 70%;
@@ -69,29 +69,57 @@
 .body{
   width: 100%;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #FFFAFA	;
   overflow: scroll;
   &__contents{
     width: 70%;
     height: auto;
     margin: 100px auto;
     background-color: white;
-    a{
-      text-decoration: none;
-      color: black;
+    p{
+      font-size: 30px;
+      text-align: center;
     }
     .index{
-      width: 50%;
-      height: 170px;
       display: flex;
-      margin: 10px 20px;
-      .index-image{
-
+      flex-wrap: wrap;
+      justify-content: space-around;
+      a{
+        text-decoration: none;
+        color: black;
+        width: auto;
+        height: auto;
       }
-      .image-contents{
-        height: 170px;
-        background-color: lightgrey;
-        width: 50%;
+      .index-box{
+        width: 30%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        .index-image{
+        }
+        .index-contents{
+          height: 170px;
+          width: 250px;
+          margin: 20px 13px;
+          position: relative;
+          &__vocab{
+            font-size: 20px;
+          }
+          &__definition{
+            width: 100%;
+            height:30%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-top: 16px;
+          }
+          &__time{
+            font-size: 12px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+          }
+        }
       }
     }
   }
