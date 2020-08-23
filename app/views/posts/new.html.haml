@@ -1,0 +1,27 @@
+.form
+  =form_with model: @post, class:"postformcontents", local: true do |f|
+    .platform__input
+      %ul
+        .formpart
+          %li
+            = f.label :言葉
+          %li
+            = f.text_field :vocab, class: 'postformwhat', placeholder:'言葉、又はフレーズを入力'
+        .formpart
+          %li
+            = f.label :意味
+          %li
+            = f.text_area :definition, class: 'postformwhat', placeholder:'意味を入力'
+        .formpart  
+          %li
+            = f.label :例文
+          %li
+            = f.text_area :example, class: 'postformwhat', placeholder:'例を入力'
+        .formpart  
+          %li
+            = f.label :画像
+          %li
+            = f.file_field :image, class: 'postformwhat', placeholder: '写真のURLを入力'
+        .formpart
+          %li
+            = f.submit '投稿する', class: 'postformbtn'
