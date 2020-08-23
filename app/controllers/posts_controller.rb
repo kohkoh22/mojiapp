@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
 
   def index
-    @post = Post.all
+    @post = Post.includes(:user).order("created_at DESC")
   end
 
   def new
@@ -33,8 +33,8 @@ end
 
 def show
   @post = Post.find(params[:id])
-  # @comment = Comment.new
-  # @comments = @post.comments.includes(:user)
+  @comment = Comment.new
+  @comments = @post.comments.includes(:user)
 end
 
 def destroy

@@ -12,3 +12,14 @@
   =link_to post_path(@post.id), method: :delete do
     削除
   = link_to '編集', edit_post_path(@post.id), method: :get
+  -if user_signed_in?
+    =form_with model:[@post, @comment],class:"commentform", local: true, id: "new_comment" do |f|
+      = f.text_area :text, placeholder: "コメントする"
+      = f.submit "SEND"
+  -else
+    ※※※ コメントの投稿には新規登録/ログインが必要です ※※※
+  -if @comments
+    %h4　コメント一覧
+    -@comments.each do |comment|
+      = link_to comment.user.nickname, "/users/#{comment.user_id}"
+      = comment.text
