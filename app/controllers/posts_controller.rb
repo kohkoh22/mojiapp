@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :move_to_index, except: [:index, :show]
+
   def index
     @post = Post.all
   end
@@ -13,6 +15,19 @@ def create
     redirect_to "/"
   else
     render :new
+  end
+end
+
+def edit
+  @post = Post.find(params[:id])
+end
+
+def update
+  @post = Post.find(params[:id])
+  if @post.update(post_params)
+    redirect_to post_path
+  else
+    render :edit
   end
 end
 
@@ -33,6 +48,13 @@ end
 
 private
   def post_params
-    params.require(:post).permit(:vocab, :definition, :example, :image)
+    params.require(:post).permit(:vocab, :definition, :example, :image).merge(user_id: current_user.id)
   end
+
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
+  end
+
 end

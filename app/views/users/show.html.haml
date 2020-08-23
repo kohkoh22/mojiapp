@@ -1,0 +1,5 @@
+-@post.each do |post|
+  =post.vocab
+  =post.definition
+  =post.example
+  =image_tag post.image.url, class: 'vocabimage', size: "170x170"

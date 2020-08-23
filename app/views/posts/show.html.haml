@@ -11,3 +11,4 @@
       =@post.example
   =link_to post_path(@post.id), method: :delete do
     削除
+  = link_to '編集', edit_post_path(@post.id), method: :get
