@@ -23,3 +23,9 @@
     -@comments.each do |comment|
       = link_to comment.user.nickname, "/users/#{comment.user_id}"
       = comment.text
+- if @post.previous.present?
+  = link_to post_path(@post.previous) do
+    前の投稿
+- if @post.next.present?
+  = link_to post_path(@post.next) do
+    次の投稿
