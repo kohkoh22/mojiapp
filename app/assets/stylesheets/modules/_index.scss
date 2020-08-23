@@ -79,8 +79,12 @@
     p{
       font-size: 30px;
       text-align: center;
+      margin: 40px;
+      line-height: 100px;
     }
     .index{
+      width: 100%;
+      height: auto;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
@@ -95,6 +99,7 @@
         height: auto;
         display: flex;
         flex-wrap: wrap;
+        padding: 63px;
         .index-image{
         }
         .index-contents{

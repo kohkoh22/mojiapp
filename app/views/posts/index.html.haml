@@ -1,8 +1,8 @@
 %p  みんなの文字
 .index
   -@post.each do |post|
-    =link_to post_path(post.id) do
-      .index-box
+    .index-box
+      =link_to post_path(post.id) do
         .index-image
           =image_tag post.image.url, class: 'vocabimage', size: "250x250" 
         .index-contents
@@ -13,5 +13,4 @@
             =post.definition
           .index-contents__time
             =post.created_at.strftime("%Y年%m月%d日 %H時%M分")
-          -# =link_to user_path(post.id) do
-          -#   =post.user.email
+  = paginate @post
