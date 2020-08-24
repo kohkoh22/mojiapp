@@ -37,6 +37,7 @@ def show
   impressionist(@post, nil, unique: [:session_hash])
   @comment = Comment.new
   @comments = @post.comments.includes(:user)
+  @like = Like.new
 end
 
 def destroy

@@ -6,6 +6,6 @@ class UsersController < ApplicationController
   def show
     @post = current_user.posts
     @user = User.find(params[:id])
-    impressionist(@user, nil, unique: [:session_hash])
+    # impressionist(@user, nil, unique: [:session_hash])
   end
 end
