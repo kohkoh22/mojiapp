@@ -1,11 +1,35 @@
-=current_user.nickname
-さんの投稿
--@post.each do |post|
-  =post.vocab
-  =post.definition
-  =post.example
-  =image_tag post.image.url, class: 'vocabimage', size: "170x170"
-いいねした投稿
--@user.liked_posts.each do |post|
-  = post.user.nickname
-  = post.vocab
+.mypage
+  .mypage__profile
+    .mypage__profile--name
+      =@user.nickname
+    .mypage__profile--contents
+      .follower
+        フォロワー
+        人
+      .followed
+        フォロー
+        人
+  .mypage__posts
+    投稿
+    .index
+      -@post.each do |post|
+        .index-box
+          =link_to post_path(post.id) do
+            .index-image
+              .mypage__contents--image
+                =image_tag post.image.url, class: 'vocabimage', size: "250x250"
+            .index-contents
+              .index-contents__vocab
+                =post.vocab
+              .index-contents__definition
+                =post.definition
+              .index-contents__like
+                =post.liked_users.count
+              .index-contents__time
+                =post.created_at.strftime("%Y年%m月%d日 %H時%M分")
+        
+  いいねした投稿
+  .mypage__likes
+    -@user.liked_posts.each do |post|
+      = post.user.nickname
+      = post.vocab

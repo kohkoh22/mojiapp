@@ -1,0 +1,30 @@
+.mypage{
+  width: 100%;
+  height: auto;
+  &__profile{
+    margin: auto;
+    height: 100px;
+    width: 80%;
+    background-color: pink;
+    border:transparent solid 2px;
+    border-radius: 3px;
+    display: flex;
+    &--name{
+      font-size: 30px;
+    }
+    &--contents{
+      font-size: 20px;
+      display: flex;
+
+      .follower, .followed{
+        width: 30px;
+        height: 30px;
+        border-bottom: 2px solid black;
+        margin: 10px;
+      }
+    }
+  }
+  &__posts{
+    text-align: center;
+  }
+}

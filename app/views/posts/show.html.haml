@@ -1,37 +1,58 @@
-.show
-  .show__top
-    .show__top--vocab
-      =@post.vocab
-    .show__top--image
-      =image_tag @post.image.url, class: 'vocabimage', size: "202x202"
-  .show__bottom
-    .show__bottom--definition
-      =@post.definition
-    .show__bottom--example
-      =@post.example
-  %h3 いいね件数
-  = @post.likes.count
-  -if current_user.already_liked?(@post)
-    = button_to 'いいねを取り消す', post_like_path(@post), method: :delete
-  -else
-    = button_to 'いいね', post_likes_path(@post)
-  %h4 いいねしたユーザー
-  -@post.liked_users.each do |user|
-    = user.nickname
+.show-wrapper
+  //投稿の基礎情報
+  .show
+    .show__top
+      .show__top--vocab
+        =@post.vocab
+      .show__top--image
+        =image_tag @post.image.url, class: 'vocabimage', size: "500x250"
+    .show__bottom
+      .show__bottom--definition
+        %h3 意味:
+        %br/
+        =@post.definition
+      .show__bottom--example
+        %h3 例文:
+        %br/
+        =@post.example
+  
+  //投稿のいいね
+  .show-likes
+    %i.fas.fa-heart.fa-lg
+    = @post.likes.count
+    -if current_user.already_liked?(@post)
+      = button_to 'いいねを取り消す', post_like_path(@post), method: :delete
+    -else
+      = button_to 'いいね', post_likes_path(@post)
+    %h4 いいねしたユーザー
+    -@post.liked_users.each do |user|
+      = user.nickname
+  //削除と編集
   =link_to post_path(@post.id), method: :delete do
     削除
   = link_to '編集', edit_post_path(@post.id), method: :get
+  //コメントする
   -if user_signed_in?
     =form_with model:[@post, @comment],class:"commentform", local: true, id: "new_comment" do |f|
       = f.text_area :text, placeholder: "コメントする"
       = f.submit "SEND"
   -else
     ※※※ コメントの投稿には新規登録/ログインが必要です ※※※
+  //コメント一覧
   -if @comments
     %h4　コメント一覧
     -@comments.each do |comment|
       = link_to comment.user.nickname, "/users/#{comment.user_id}"
       = comment.text
+  //投稿したユーザー
+  =link_to user_path(@post.user_id) do
+    =@post.user.nickname
+    %span/
+    の投稿
+  //投稿時間
+  %i.far.fa-clock
+  =@post.created_at.strftime("%Y年%m月%d日 %H時%M分")
+  //前と次の投稿
 - if @post.previous.present?
   = link_to post_path(@post.previous) do
     前の投稿

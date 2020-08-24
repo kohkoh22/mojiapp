@@ -16,16 +16,17 @@
     color:black ;
   }
   &__contents{
-    width: 70%;
+    width:70%;
     margin: auto;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     .appname{
-      width: 150px;
+      width:auto;
       height: 56px;
       font-size: 40px;
       color: rgb(9, 14, 14);
+      text-align: start;
     }
     .tabs{
       display: flex;
@@ -63,13 +64,17 @@
     .search{
 
     }
+    .logins{
+      display: flex;
+      justify-content: space-around;
+    }
   }
 }
 
 .body{
   width: 100%;
   height: 100vh;
-  background-color: #FFFAFA	;
+  background-color: #FFFAFA ;
   overflow: scroll;
   &__contents{
     width: 70%;
