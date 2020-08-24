@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   def index
     @post = Post.page(params[:page]).per(6).order("created_at DESC")
     @posts = Post.order(impressions_count: 'DESC')
+    @postss = Post.all.sort {|a,b| b.liked_users.count <=> a.liked_users.count}
   end
 
   def new
