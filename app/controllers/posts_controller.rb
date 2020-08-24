@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.page(params[:page]).per(6).order("created_at DESC")
+    @posts = Post.order(impressions_count: 'DESC')
   end
 
   def new
@@ -33,6 +34,7 @@ end
 
 def show
   @post = Post.find(params[:id])
+  impressionist(@post, nil, unique: [:session_hash])
   @comment = Comment.new
   @comments = @post.comments.includes(:user)
 end
