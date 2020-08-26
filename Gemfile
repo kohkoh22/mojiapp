@@ -61,3 +61,6 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'impressionist'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
