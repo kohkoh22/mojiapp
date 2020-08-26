@@ -1,18 +1,27 @@
 .mypage
   .mypage__profile
+    .mypage__profile--image
+      -if @user.image.url
+        =image_tag @user.image.url, class: 'userimage', size: "130x130"
     .mypage__profile--name
       =@user.nickname
-      -if @user.image.url
-        =image_tag @user.image.url, class: 'userimage', size: "150x150"
-      -if user_signed_in? && @user == current_user
-        = link_to "プロフィール編集", edit_user_path(current_user)
+    -if user_signed_in? && @user == current_user
+      .mypage__profile--edit
+        = link_to "編集", edit_user_path(current_user)
     .mypage__profile--contents
+      .number-of-posts
+        =@user.posts.count
+        %br/
+        投稿数
       .follower
+        90人
+        %br/
         フォロワー
-        人
       .followed
+        100人
+        %br/
         フォロー
-        人
+  .mypage__more
   .mypage__posts
     投稿
     .index

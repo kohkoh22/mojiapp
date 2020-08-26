@@ -3,31 +3,62 @@
   height: auto;
   &__profile{
     margin: auto;
-    height: 100px;
+    height: 160px;
     width: 80%;
-    background-color: pink;
+    background-color: #F5F5F5;
     border:transparent solid 2px;
     border-radius: 3px;
     display: flex;
+    position: relative;
     &--name{
       font-size: 30px;
+      margin: auto 40px;
+    }
+    &--edit{
+      width: auto;
+      height: auto;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      border: 1px solid transparent;
+      border-radius: 30px;
+      padding: 3px 30px;
+      margin-right: 20px;
+      background-color: skyblue;
+      a{
+        text-decoration: none;
+        color: white;
+      }
+    }
+    &--image{
+      position: absolute;
+      top: 90px;
+      right: 450px;
       .userimage{
         border-radius: 50%;
         background-position: center center;
-
       }
     }
     &--contents{
-      font-size: 20px;
+      font-size: 18px;
       display: flex;
-
-      .follower, .followed{
-        width: 30px;
-        height: 30px;
-        border-bottom: 2px solid black;
-        margin: 10px;
+      position: absolute;
+      top: 42px;
+      right: 100px;
+      text-align: center;
+      .follower, .followed, .number-of-posts{
+        margin-left: 30px;
       }
     }
+  }
+
+  &__more{
+    margin: auto;
+    height: 160px;
+    width: 80%;
+    background-color: lightsteelblue;
+    border:transparent solid 2px;
+    border-radius: 3px;
   }
   &__posts{
     text-align: center;
