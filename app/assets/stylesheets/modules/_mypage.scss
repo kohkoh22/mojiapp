@@ -11,6 +11,11 @@
     display: flex;
     &--name{
       font-size: 30px;
+      .userimage{
+        border-radius: 50%;
+        background-position: center center;
+
+      }
     }
     &--contents{
       font-size: 20px;

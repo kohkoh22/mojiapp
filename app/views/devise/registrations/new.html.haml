@@ -5,6 +5,11 @@
     = f.label :ニックネーム
     %br/
     = f.text_field :nickname, autofocus: true
+
+  .field
+    = f.label :プロフィール画像
+    %br/
+    = f.file_field :image, class: 'postformwhat', placeholder: '写真のURLを入力'
     
   .field
     = f.label :email
