@@ -35,6 +35,7 @@ end
 
 def show
   @post = Post.find(params[:id])
+  @user = Post.find(params[:id])
   @posts = Post.order(impressions_count: 'DESC')
   @postss = Post.all.sort {|a,b| b.liked_users.count <=> a.liked_users.count}
   impressionist(@post, nil, unique: [:session_hash])

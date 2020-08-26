@@ -25,6 +25,8 @@
           前の投稿
     //投稿したユーザー
     .show__user
+      -if @post.user.image.url
+        =image_tag @post.user.image.url, class: 'userimage', size: "50x50"
       投稿者:
       =link_to user_path(@post.user_id) do
         =@post.user.nickname
@@ -69,6 +71,8 @@
   //コメント一覧
   -if @comments
     .commentindex
+      =@comments.count
+      件のコメント
       %h4 コメント一覧
       .commentindex__box
         -@comments.each do |comment|

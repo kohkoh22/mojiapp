@@ -91,7 +91,11 @@
     &__user{
       position: absolute;
       left: 50px;
-      bottom:150px;
+      bottom:120px;
+      .userimage{
+        border-radius: 50%;
+        background-position: center center;
+      }
     }
     &__time{
       position: absolute;
