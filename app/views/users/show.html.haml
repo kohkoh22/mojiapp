@@ -25,7 +25,7 @@
   .mypage__posts
     投稿
     .index
-      -@post.each do |post|
+      -@user.posts.each do |post|
         .index-box
           =link_to post_path(post.id) do
             .index-image
