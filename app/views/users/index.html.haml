@@ -1,6 +1,3 @@
-- @users.each.with_index(1) do |user, index|
-  = index
-  位
-   = link_to user do
-   = user.name
-   = user.impressions_count
+- @users.each do |user|
+  =link_to user_path(user.id) do
+    =user.nickname

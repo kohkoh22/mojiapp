@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show, :edit, :update]
   def index
-    @users = User.order(impressions_count: 'DESC') # ソート機能を追加
+    # @users = User.order(impressions_count: 'DESC') # ソート機能を追加
+    @users = User.all
   end
   
   def show
