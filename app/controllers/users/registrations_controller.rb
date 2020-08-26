@@ -1,5 +1,6 @@
-class RegistrationsController < ApplicationController
-  # before_action :forbid_test_user, {only: [:edit,:update,:destroy]}
+# frozen_string_literal: true
+
+class Users::RegistrationsController < Devise::RegistrationsController
   def create
     if params[:sns_auth] == 'true'
       pass = Devise.friendly_token
