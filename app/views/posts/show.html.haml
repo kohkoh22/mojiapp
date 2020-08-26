@@ -15,47 +15,67 @@
         %h3 例文:
         %br/
         =@post.example
-  
+    //前と次の投稿
+    .show__link
+      - if @post.next.present?
+        = link_to post_path(@post.next),class:"show__link--next" do
+          次の投稿
+      - if @post.previous.present?
+        = link_to post_path(@post.previous),class:"show__link--previous" do
+          前の投稿
+    //投稿したユーザー
+    .show__user
+      投稿者:
+      =link_to user_path(@post.user_id) do
+        =@post.user.nickname
+    .show__time
+      //投稿時間
+      %i.far.fa-clock
+      =@post.created_at.strftime("%Y年%m月%d日 %H時%M分")
+//いいねと消去編集
+.show-detail
   //投稿のいいね
   .show-likes
-    %i.fas.fa-heart.fa-lg
+    %i.fas.fa-heart
     = @post.likes.count
     -if current_user.already_liked?(@post)
       = button_to 'いいねを取り消す', post_like_path(@post), method: :delete
     -else
       = button_to 'いいね', post_likes_path(@post)
-    %h4 いいねしたユーザー
-    -@post.liked_users.each do |user|
-      = user.nickname
+    -# .show-likes__users
+    -#   %h4 いいねしたユーザー
+    -#   -@post.liked_users.each do |user|
+    -#     = user.nickname
   //削除と編集
-  =link_to post_path(@post.id), method: :delete do
-    削除
-  = link_to '編集', edit_post_path(@post.id), method: :get
-  //コメントする
+  .delete-and-edit
+    = link_to edit_post_path(@post.id), class:"editbtn", method: :get do
+      編集
+    =link_to post_path(@post.id), class:"deletebtn", method: :delete do
+      削除
+  //twitterでシェア
+  = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @post.vocab }を、Twitterでみんなに広めよう！", class: 'btn btn-default', target: '_blank' do
+    %i.fab.fa-twitter 
+    Twitterでシェア
+//コメントする
+.comment
   -if user_signed_in?
     =form_with model:[@post, @comment],class:"commentform", local: true, id: "new_comment" do |f|
-      = f.text_area :text, placeholder: "コメントする"
-      = f.submit "SEND"
+      .commentinput
+        = f.text_area :text, placeholder: "コメントする"
+      .commentbtn
+        = f.submit "コメントする"
   -else
     ※※※ コメントの投稿には新規登録/ログインが必要です ※※※
   //コメント一覧
   -if @comments
-    %h4　コメント一覧
-    -@comments.each do |comment|
-      = link_to comment.user.nickname, "/users/#{comment.user_id}"
-      = comment.text
-  //投稿したユーザー
-  =link_to user_path(@post.user_id) do
-    =@post.user.nickname
-    %span/
-    の投稿
-  //投稿時間
-  %i.far.fa-clock
-  =@post.created_at.strftime("%Y年%m月%d日 %H時%M分")
-  //前と次の投稿
-- if @post.previous.present?
-  = link_to post_path(@post.previous) do
-    前の投稿
-- if @post.next.present?
-  = link_to post_path(@post.next) do
-    次の投稿
+    .commentindex
+      %h4 コメント一覧
+      .commentindex__box
+        -@comments.each do |comment|
+          = link_to comment.user.nickname, "/users/#{comment.user_id}"
+          = comment.text
+  -else
+    コメントがありません
+.ranking
+  =render partial: "impression", locals: { post: @posts }
+  =render partial: "like", locals: { post: @posts }

@@ -1,0 +1,7 @@
+%h2 かんたんログイン
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .field
+    =f.hidden_field :email ,value: "test@test.com"
+    =f.hidden_field :password ,value: "aaaaaa"
+  .actions
+    = f.submit "かんたんログイン"
