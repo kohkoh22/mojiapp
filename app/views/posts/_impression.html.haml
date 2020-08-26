@@ -1,0 +1,23 @@
+.impression-box
+  .impression-title
+    %i.fas.fa-crown
+    %h3 閲覧数順ランキング
+  .impression-ranking
+    - @posts.each.with_index(1) do |post, index|
+      .impression
+        =link_to post_path(post.id) do
+          .impression__index
+            = index
+            位
+          .impression__image
+            =image_tag post.image.url, class: 'vocabimage', size: "200x200"
+          .impression__contents
+            .impression__contents--vocab
+              =post.vocab
+            .impression__contents--definition
+              =post.definition
+            .impression__contents--numbers
+              閲覧数
+              =post.impressions_count
+            .impression__contents--time
+              =post.created_at.strftime("%Y年%m月%d日 %H時%M分")

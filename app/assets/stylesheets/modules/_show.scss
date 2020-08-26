@@ -7,26 +7,32 @@
   margin: auto;
   .show{
     display: flex;
+    position: relative;
+    height: 600px;
+    width:100% ;
     &__top{
       width: 100%;
-      height: 50%;
+      height: 100%;
       text-align: center;
-      margin: auto;
       &--vocab{
-        width: 50%;
+        width: auto;
         height: 100%;
-        font-size: 50px;
+        font-size: 30px;
         font-weight: 450;
-        margin:30px auto;
+        margin:35px auto 0;
       }
       &--image{
-        margin: auto;
+        margin:0 auto ;
+        position: absolute;
+        left: 60px;
+        top: 160px;
       }
     }
     &__bottom{
       width: 100%;
-      height: 50%;
+      height: 60%;
       margin-top:60px;
+      overflow: scroll;
       &--definition{
         width: 70%;
         height: auto;
@@ -56,10 +62,134 @@
         }
       }
     }
-  }
+    &__link{
+      position: absolute;
+      bottom:50px;
+      left: 470px;
+      width: 300px;
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+      line-height: 40px;
 
-  .show-likes{
-    display: flex;
+      &--previous{
+        border: 2px solid lightblue;
+        border-radius: 3px;
+        width: 120px;
+        text-decoration: none;
+        color: lightblue;
+      }
+      &--next{
+        border: 2px solid lightblue;
+        border-radius: 3px;
+        width: 120px;
+        text-decoration: none;
+        color: lightblue;
+      }
+    }
+    &__user{
+      position: absolute;
+      left: 50px;
+      bottom:150px;
+    }
+    &__time{
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
   }
 }
 
+.show-detail{
+  display: flex;
+  width: 100%;
+  height: auto;
+  .show-likes{
+    width: auto;
+    height: 100px;
+    width: 50%;
+    font-size: 15px;
+    margin-top: 20px;
+    
+    display: flex;
+    &__users{
+      width: auto;
+      height: 15px;
+    }
+  }
+  .delete-and-edit{
+    width: 50%;
+    height: 100px;
+    display: flex;
+    position: relative;
+    text-align: center;
+    margin: 20px auto;
+    
+      .deletebtn{
+        width: 100px;
+        height: 30px;
+        border: 2px solid black;
+        border-radius: 3px;
+        position: absolute;
+        right: 0;
+        top: 15px;
+        background-color: red;
+        color: white;
+        
+        a{
+          color:white ;
+          text-decoration: none;
+        }
+      }
+      .editbtn{
+        width: 100px;
+        height: 30px;
+        border: 2px solid black;
+        border-radius: 3px;
+        position: absolute;
+        right: 110px;
+        top: 15px;
+        a{
+          color: black;
+          text-decoration: none;
+        }
+      }
+  }
+}
+
+.comment{
+  height: auto;
+  width: 100%;
+  .commentform{
+    height: auto;
+    width: 70%;
+    margin: 14px auto 50px;
+    textarea{
+      margin: 13px 219.5px;
+      width: 50%;
+      height: 100px;
+    }
+    input{
+      color: black;
+      height: 30px;
+      width: 20%;
+      margin: 0 351px;
+    }
+  }
+  .commentindex{
+    width: 70%;
+    height: auto;
+    margin: auto;
+    h4{
+      text-align: center;
+      font-size: 17px;
+    }
+    &__box{
+      width: 439px;
+      height: 150px;
+      margin: auto;
+      border: 2px solid grey;
+    }
+  }
+}
