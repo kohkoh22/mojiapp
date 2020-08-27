@@ -3,7 +3,7 @@
     %i.fas.fa-crown
     %h3 閲覧数順ランキング
   .impression-ranking
-    - @posts.each.with_index(1) do |post, index|
+    - @posts.first(10).each.with_index(1) do |post, index|
       .impression
         =link_to post_path(post.id) do
           .impression__index

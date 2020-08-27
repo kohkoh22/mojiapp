@@ -28,6 +28,16 @@
       color: rgb(9, 14, 14);
       text-align: start;
     }
+    .search{
+      .search-input{
+        width: 300px;
+        height: 35px;
+      }
+      .search-btn{
+        width: 70px;
+        height: 35px;
+      }
+    }
     .tabs{
       display: flex;
       width: auto;
@@ -61,9 +71,6 @@
       }
 
     }
-    .search{
-
-    }
     .logins{
       display: flex;
       justify-content: space-around;
@@ -76,6 +83,7 @@
   height: 100vh;
   background-color: #FFFAFA ;
   overflow: scroll;
+
   &__contents{
     width: 70%;
     height: auto;
