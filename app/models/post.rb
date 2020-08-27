@@ -5,11 +5,20 @@ class Post < ApplicationRecord
   is_impressionable counter_cache: true
   has_many :likes
   has_many :liked_users, through: :likes, source: :user
+  acts_as_taggable
   def previous
     user.posts.order('created_at desc, id desc').where('created_at <= ? and id < ?', created_at, id).first
   end
 
   def next
     user.posts.order('created_at desc, id desc').where('created_at >= ? and id > ?', created_at, id).reverse.first
+  end
+
+  def self.search(search)
+    if search != ""
+      Post.where('vocab LIKE(?)', "%#{search}%")
+    else
+      Post.all
+    end
   end
 end

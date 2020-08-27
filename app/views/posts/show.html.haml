@@ -58,6 +58,7 @@
   = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @post.vocab }を、Twitterでみんなに広めよう！", class: 'btn btn-default', target: '_blank' do
     %i.fab.fa-twitter 
     Twitterでシェア
+= raw(@post.tag_list.map { |t| link_to t, tag_path(t), class: "label label-default" }.join(' '))
 //コメントする
 .comment
   -if user_signed_in?
@@ -80,6 +81,8 @@
           = comment.text
   -else
     コメントがありません
+-@tags.each do |tag|
+  = link_to "#{tag.name}(#{tag.taggings_count})", tag_path(tag.name), class: "label label-default"
 .ranking
   =render partial: "impression", locals: { post: @posts }
   =render partial: "like", locals: { post: @posts }

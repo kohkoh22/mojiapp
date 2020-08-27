@@ -22,6 +22,11 @@
             = f.label :画像
           %li
             = f.file_field :image, class: 'postformwhat', placeholder: '写真のURLを入力'
+        .formpart  
+          %li
+            = f.label :"タグ( 、で分てください)"
+          %li
+            = f.text_field :tag_list, class: 'postformwhat', placeholder: 'iamge, ok'
         .formpart
           %li
             = f.submit '編集する', class: 'postformbtn'
