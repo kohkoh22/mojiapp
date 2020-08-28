@@ -1,0 +1,29 @@
+.search-user{
+  margin: auto;
+
+}
+.user-list{
+  margin: 30px auto;
+  height: auto;
+  width: 70%;
+  font-size: 19px;
+  a{
+    text-decoration: none;
+    color: black;
+  }
+  th{
+    width: auto;
+    border: 2px solid lightblue;
+    border-right: none;
+    padding: 6px;
+    .userimage{
+      border-radius: 50%;
+    }
+  }
+  td{
+    width: auto;
+    border: 2px solid lightblue;
+    border-left: none;
+    padding: 6px;
+  }
+}

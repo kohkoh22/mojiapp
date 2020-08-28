@@ -89,6 +89,7 @@
     height: auto;
     margin: 100px auto;
     background-color: white;
+    position: relative;
     p{
       font-size: 30px;
       text-align: center;
@@ -150,6 +151,25 @@
           }
         }
       }
+    }
+
+    .tag{
+      width: 240px;
+      height: auto;
+      background-color: white;
+      position: absolute;
+      left: -260px;
+      top: 0px;
+      display: flex;
+      flex-wrap: wrap;
+      text-align: center;
+      &__box{
+        width: auto;
+        height: auto;
+        margin: 3px;
+        font-size: 15px;
+      }
+
     }
 
     .ranking{

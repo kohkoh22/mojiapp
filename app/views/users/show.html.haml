@@ -14,14 +14,21 @@
         %br/
         投稿数
       .follower
-        90人
-        %br/
-        フォロワー
+        = link_to following_user_path(@user) do
+          =@user.followed.count
+          %br/
+          フォロワー
       .followed
-        100人
-        %br/
-        フォロー
+        =link_to followers_user_path(@user) do
+          =@user.follower.count
+          %br/
+          フォロー
   .mypage__more
+    -unless @user == current_user
+      -if current_user.following?(@user)
+        = link_to 'フォロー外す', unfollow_path(@user.id), method: :POST
+      -else
+        = link_to 'フォローする', follow_path(@user.id), method: :POST
   .mypage__posts
     投稿
     .index

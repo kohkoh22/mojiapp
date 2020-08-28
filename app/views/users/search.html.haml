@@ -9,8 +9,6 @@
         %tr
           %th
             =link_to user_path(user.id) do
-              -if user.image.url
-                =image_tag user.image.url, class: 'userimage', size: "40x40"
               =user.nickname
           %td
             -if current_user.following?(user)

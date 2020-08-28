@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show, :edit, :update]
   def index
-    # @users = User.order(impressions_count: 'DESC') # ソート機能を追加
-    @users = User.all
+    @users = User.all.sort {|a,b| b.followed.count <=> a.followed.count}
   end
   
   def show
@@ -27,8 +26,25 @@ class UsersController < ApplicationController
      end
   end
 
+  def search
+    @users = User.search(params[:keyword])
+  end
+
+  def following
+    @user  = User.find(params[:id])
+    @users = @user.follower
+    render 'following'
+end
+
+def followers
+  @user  = User.find(params[:id])
+  @users = @user.followed
+  render 'followed'
+end
+
+
   private
   def user_params
-    params.fetch(:user, {}).permit(:nickname)
+    params.fetch(:user, {}).permit(:nickname, :image)
   end
 end
