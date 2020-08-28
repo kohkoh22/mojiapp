@@ -1,0 +1,14 @@
+.user-list
+  フォロワー
+  %table
+    -@user.follower_user.where.not(id: current_user.id).each do |user|
+      %tr
+        %th
+          =link_to user_path(user.id) do
+            =user.nickname
+        %td
+          -if current_user.following?(user)
+            = link_to 'フォロー外す', unfollow_path(user.id), method: :POST
+          -else
+            = link_to 'フォローする', follow_path(user.id), method: :POST
+  

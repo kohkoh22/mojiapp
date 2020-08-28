@@ -9,9 +9,38 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :likes, source: :post
   has_many :sns_credentials
   mount_uploader :image, ImageUploader
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy # フォロー取得
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy # フォロワー取得
+  has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
+  has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
   def already_liked?(post)
     self.likes.exists?(post_id: post.id)
   end
+
+  def follow(user_id)
+    follower.create(followed_id: user_id)
+  end
+  
+  # ユーザーのフォローを外す
+  def unfollow(user_id)
+    follower.find_by(followed_id: user_id).destroy
+  end
+  
+  # フォローしていればtrueを返す
+  def following?(user)
+    following_user.include?(user)
+  end
+
+  def self.search(search)
+    if search != ""
+      User.where('nickname LIKE(?)', "%#{search}%")
+    else
+      User.all
+    end
+  end
+
+  
+
   def self.from_omniauth(auth)
     sns = SnsCredential.where(provider: auth.provider, uid: auth.uid).first_or_create
     # sns認証したことがあればアソシエーションで取得
