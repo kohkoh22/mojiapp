@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def show
     @post = current_user.posts
     @user = User.find(params[:id])
+    @tags = ActsAsTaggableOn::Tag.all
     # impressionist(@user, nil, unique: [:session_hash])
   end
 

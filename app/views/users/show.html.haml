@@ -5,9 +5,21 @@
         =image_tag @user.image.url, class: 'userimage', size: "130x130"
     .mypage__profile--name
       =@user.nickname
+      %br/
+      -unless @user == current_user
+        -if current_user.following?(@user)
+          = link_to unfollow_path(@user.id), method: :POST, class:"follow-function" do
+            %i.fas.fa-user-times
+            フォロー外す
+        -else
+          = link_to follow_path(@user.id), method: :POST, class:"follow-function" do
+            %i.fas.fa-user-plus
+            フォローする
     -if user_signed_in? && @user == current_user
       .mypage__profile--edit
-        = link_to "編集", edit_user_path(current_user)
+        = link_to edit_user_path(current_user) do
+          %i.fas.fa-user-edit
+          編集する
     .mypage__profile--contents
       .number-of-posts
         =@user.posts.count
@@ -24,32 +36,39 @@
           %br/
           フォロー
   .mypage__more
-    -unless @user == current_user
-      -if current_user.following?(@user)
-        = link_to 'フォロー外す', unfollow_path(@user.id), method: :POST
-      -else
-        = link_to 'フォローする', follow_path(@user.id), method: :POST
+    
   .mypage__posts
-    投稿
     .index
       -@user.posts.each do |post|
         .index-box
           =link_to post_path(post.id) do
             .index-image
-              .mypage__contents--image
-                =image_tag post.image.url, class: 'vocabimage', size: "250x250"
+              =image_tag post.image.url, class: 'vocabimage', size: "250x250" 
             .index-contents
               .index-contents__vocab
                 =post.vocab
               .index-contents__definition
+                意味:
                 =post.definition
-              .index-contents__like
-                =post.liked_users.count
+              .index-contents__detail
+                .index-contents__detail--user
+                  =link_to user_path(post.user_id) do
+                    =image_tag post.user.image.url, class:'profilepic', size:"30x30"
+                    =post.user.nickname
+                .index-contents__detail--stats
+                  %i.far.fa-eye
+                  =post.impressions_count
+                  %i.fas.fa-heart.my-red
+                  =post.liked_users.count
               .index-contents__time
-                =post.created_at.strftime("%Y年%m月%d日 %H時%M分")
+                =post.created_at.strftime("%Y年%m月%d日")
         
   いいねした投稿
   .mypage__likes
     -@user.liked_posts.each do |post|
       = post.user.nickname
       = post.vocab
+.tag
+  -@tags.each do |tag|
+    .tag__box
+      = link_to "#{tag.name}(#{tag.taggings_count})", tag_path(tag.name), class: "label label-default"

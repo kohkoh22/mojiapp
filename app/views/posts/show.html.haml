@@ -2,10 +2,45 @@
   //投稿の基礎情報
   .show
     .show__top
-      .show__top--vocab
-        =@post.vocab
-      .show__top--image
+      .show__top--image 
+        //写真
         =image_tag @post.image.url, class: 'vocabimage', size: "500x250"
+      .show__top--vocab
+        //次と前の投稿へ
+        .nextbtn
+          - if @post.previous.present?
+            = link_to post_path(@post.previous),class:"show-btn" do
+              %i.fas.fa-chevron-left
+              %br/
+              次へ
+        =@post.vocab
+        .nextbtn
+          - if @post.next.present?
+            = link_to post_path(@post.next),class:"showbtn" do
+              %i.fas.fa-chevron-right
+              %br/
+              前へ
+      //投稿したユーザー
+      .show__top--user-likes
+        .show-user
+          =link_to user_path(@post.user_id) do
+            -if @post.user.image.url
+              =image_tag @post.user.image.url, class: 'userimage', size: "40x40"
+            =@post.user.nickname
+          
+        .show-likes
+          = @post.likes.count
+          -if user_signed_in?
+            -if current_user.already_liked?(@post)
+              = button_to post_like_path(@post), method: :delete, class:"like-btn" do
+                %i.fas.fa-heart.my-red
+            -else
+              = button_to post_likes_path(@post), class:"like-btn" do
+                %i.fas.fa-heart.my-red
+          -else
+            %i.fas.fa-heart.my-red
+          %i.far.fa-eye
+          =@post.impressions_count
     .show__bottom
       .show__bottom--definition
         %h3 意味:
@@ -15,70 +50,61 @@
         %h3 例文:
         %br/
         =@post.example
-    //前と次の投稿
-    .show__link
-      - if @post.next.present?
-        = link_to post_path(@post.next),class:"show__link--next" do
-          次の投稿
-      - if @post.previous.present?
-        = link_to post_path(@post.previous),class:"show__link--previous" do
-          前の投稿
-    //投稿したユーザー
-    .show__user
-      -if @post.user.image.url
-        =image_tag @post.user.image.url, class: 'userimage', size: "50x50"
-      投稿者:
-      =link_to user_path(@post.user_id) do
-        =@post.user.nickname
-    .show__time
-      //投稿時間
-      %i.far.fa-clock
-      =@post.created_at.strftime("%Y年%m月%d日 %H時%M分")
-//いいねと消去編集
-.show-detail
-  //投稿のいいね
-  .show-likes
-    %i.fas.fa-heart
-    = @post.likes.count
-    -if current_user.already_liked?(@post)
-      = button_to 'いいねを取り消す', post_like_path(@post), method: :delete
-    -else
-      = button_to 'いいね', post_likes_path(@post)
-    -# .show-likes__users
-    -#   %h4 いいねしたユーザー
-    -#   -@post.liked_users.each do |user|
-    -#     = user.nickname
-  //削除と編集
-  .delete-and-edit
-    = link_to edit_post_path(@post.id), class:"editbtn", method: :get do
-      編集
-    =link_to post_path(@post.id), class:"deletebtn", method: :delete do
-      削除
-  //twitterでシェア
-  = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @post.vocab }を、Twitterでみんなに広めよう！", class: 'btn btn-default', target: '_blank' do
-    %i.fab.fa-twitter 
-    Twitterでシェア
-= raw(@post.tag_list.map { |t| link_to t, tag_path(t), class: "label label-default" }.join(' '))
+    
+      .show__bottom--time
+        //投稿時間
+        %i.far.fa-clock
+        =@post.created_at.strftime("%Y年%m月%d日 %H時%M分")
+      //twitterでシェア
+      .show__bottom--share
+        = link_to "https://twitter.com/share?url=#{ request.url }&text=#{ @post.vocab }を、Twitterでみんなに広めよう！", class: 'share-btn', target: '_blank' do
+          %i.fab.fa-twitter 
+          Twitterでシェア
+      //削除と編集
+      -if user_signed_in? && current_user.id == @post.user_id
+        .show__bottom--delete-and-edit
+          = link_to edit_post_path(@post.id), class:"editbtn", method: :get do
+            %i.fas.fa-edit
+            編集
+          =link_to post_path(@post.id), class:"deletebtn", method: :delete do
+            %i.fas.fa-trash-alt
+            削除
+      
+      .show__bottom--tag
+        タグ:
+        .show__tag--each
+          = raw(@post.tag_list.map { |t| link_to t, tag_path(t), class: "label label-default" }.join(' '))
 //コメントする
 .comment
+  .comment__logo
+    %i.fas.fa-comments.fa-2x
   -if user_signed_in?
-    =form_with model:[@post, @comment],class:"commentform", local: true, id: "new_comment" do |f|
+    =form_with model:[@post, @comment],class:"comment__form", local: true, id: "new_comment" do |f|
       .commentinput
-        = f.text_area :text, placeholder: "コメントする"
+        = f.text_area :text, placeholder: "コメントを入力"
       .commentbtn
-        = f.submit "コメントする"
+        = f.submit "投稿"
   -else
-    ※※※ コメントの投稿には新規登録/ログインが必要です ※※※
+    %h6 ※※※ コメントの投稿には新規登録/ログインが必要です ※※※
   //コメント一覧
   -if @comments
-    .commentindex
-      =@comments.count
-      件のコメント
-      %h4 コメント一覧
-      .commentindex__box
+    .comment__index
+      .comment__index--number
+        %i.fas.fa-comment
+        =@comments.count
+        件
+      .comment__index--box
         -@comments.each do |comment|
-          = link_to comment.user.nickname, "/users/#{comment.user_id}"
-          = comment.text
+          .comment-each
+            .comment-each__who
+              .comment-each__who--name
+                = link_to "/users/#{comment.user_id}" do
+                  =image_tag comment.user.image.url, class: 'userimage', size: "40x40"
+                  =comment.user.nickname
+              .comment-each__who--time
+                = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+            .comment-each__what
+              = comment.text
   -else
     コメントがありません
 .tag

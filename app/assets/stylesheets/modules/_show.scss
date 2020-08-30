@@ -1,44 +1,75 @@
 .show-wrapper{
-  width: 100%;
-  height: auto;
-  border: 2px solid black;
-  box-shadow: 10px 10px 10px rgba(0,0,0,0.4);
-  border-radius: 5px;
+  width: 70%;
+  border-bottom: lightgrey solid 2px;
   margin: auto;
   .show{
-    display: flex;
-    position: relative;
-    height: 600px;
+    height: auto;
     width:100% ;
     &__top{
       width: 100%;
       height: 100%;
-      text-align: center;
       &--vocab{
         width: auto;
         height: 100%;
         font-size: 30px;
         font-weight: 450;
         margin:35px auto 0;
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        .nextbtn{
+          font-size: 20px;
+
+        }
       }
       &--image{
-        margin:0 auto ;
-        position: absolute;
-        left: 60px;
-        top: 160px;
+        .vocabimage{
+          margin: 40px 189px;
+        }
+      }
+
+      &--user-likes{
+        width: 70%;
+        margin: 100px auto;
+        text-align: none;
+        display: flex;
+        justify-content: space-between;
+        .show-user{
+          a{
+            color: black;
+            font-size: 17px;
+          }
+          .userimage{
+            border-radius: 50%;
+            background-position: center center;
+          }
+        }
+        .show-likes{
+          width: 70px;
+          justify-content: space-between;
+          display: flex;
+          font-size: 20px;
+          .my-red{
+            color: red;
+          }
+          .like-btn{
+            border: none;
+            background-color: transparent;
+          }
+        }
       }
     }
     &__bottom{
       width: 100%;
-      height: 60%;
-      margin-top:60px;
-      overflow: scroll;
+      height: auto;
+      margin-top:100px;
+      position: relative;
       &--definition{
         width: 70%;
         height: auto;
         margin: auto;
-        border-top-style: double;
-        border-bottom-style: double;
+        border-top: 1px solid lightgrey;
+        border-bottom: 1px solid lightgrey;
         padding: 20px 0;
         h3{
           font-size: 20px;
@@ -52,7 +83,7 @@
         width: 70%;
         height: auto;
         margin: 20px auto;
-        border-bottom-style: double;
+        border-bottom: 1px solid lightgrey;
         padding: 20px 0;
         h3{
           font-size: 20px;
@@ -61,139 +92,133 @@
           margin: 20px 0;
         }
       }
-    }
-    &__link{
-      position: absolute;
-      bottom:50px;
-      left: 470px;
-      width: 300px;
-      height: 50px;
-      display: flex;
-      justify-content: space-between;
-      text-align: center;
-      line-height: 40px;
-
-      &--previous{
-        border: 2px solid lightblue;
-        border-radius: 3px;
-        width: 120px;
-        text-decoration: none;
-        color: lightblue;
-      }
-      &--next{
-        border: 2px solid lightblue;
-        border-radius: 3px;
-        width: 120px;
-        text-decoration: none;
-        color: lightblue;
-      }
-    }
-    &__user{
-      position: absolute;
-      left: 50px;
-      bottom:120px;
-      .userimage{
-        border-radius: 50%;
-        background-position: center center;
-      }
-    }
-    &__time{
-      position: absolute;
-      right: 0;
-      bottom: 0;
-    }
-  }
-}
-
-.show-detail{
-  display: flex;
-  width: 100%;
-  height: auto;
-  .show-likes{
-    width: auto;
-    height: 100px;
-    width: 50%;
-    font-size: 15px;
-    margin-top: 20px;
-    
-    display: flex;
-    &__users{
-      width: auto;
-      height: 15px;
-    }
-  }
-  .delete-and-edit{
-    width: 50%;
-    height: 100px;
-    display: flex;
-    position: relative;
-    text-align: center;
-    margin: 20px auto;
-    
-      .deletebtn{
-        width: 100px;
-        height: 30px;
-        border: 2px solid black;
-        border-radius: 3px;
+      &--time{
         position: absolute;
         right: 0;
-        top: 15px;
-        background-color: red;
-        color: white;
-        
+        bottom: 0;
+      }
+      &--delete-and-edit{
+        width: 70%;
+        height: 100px;
+        font-size: 15px;
+        display: flex;
+        text-align: center;
+        margin: auto;
+        justify-content: flex-end;
+          .deletebtn{
+            width: 100px;
+            height: 23px;
+            border-radius: 3px;
+            background-color: red;
+            color: white;
+            
+            a{
+              color:white ;
+              text-decoration: none;
+            }
+          }
+          .editbtn{
+            width: 100px;
+            height: 23px;
+            background-color: lightgrey;
+            border-radius: 3px;
+            a{
+              color: black;
+              text-decoration: none;
+            }
+          }
+      }
+
+      &--share{
+        width: 70%;
+        height: auto;
+        display: flex;
+        justify-content: flex-end;
+        margin: 20px auto;
         a{
-          color:white ;
           text-decoration: none;
+          color: white;
+        }
+        .share-btn{
+          width: 163px;
+          border-radius: 5px;
+          background-color: #00aced;
+          padding: 5px;
         }
       }
-      .editbtn{
-        width: 100px;
-        height: 30px;
-        border: 2px solid black;
-        border-radius: 3px;
-        position: absolute;
-        right: 110px;
-        top: 15px;
-        a{
-          color: black;
-          text-decoration: none;
-        }
-      }
-  }
+      
+    }
+}
+
+
 }
 
 .comment{
   height: auto;
-  width: 100%;
-  .commentform{
+  width: 70%;
+  margin: auto;
+  h6{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  &__logo{
+    width:50px;
+    height: 50px;
+    margin:30px auto;
+  }
+  &__form{
     height: auto;
     width: 70%;
-    margin: 14px auto 50px;
+    display: flex;
+    margin: 0 auto 30px;
     textarea{
-      margin: 13px 219.5px;
-      width: 50%;
-      height: 100px;
+      height: 30px;
+      width: 500px;
     }
     input{
       color: black;
       height: 30px;
-      width: 20%;
-      margin: 0 351px;
+      width: 100px;
     }
   }
-  .commentindex{
+  &__index{
     width: 70%;
     height: auto;
     margin: auto;
-    h4{
-      text-align: center;
+    background-color:antiquewhite ;
+    border-radius: 7px;
+    &--number{
       font-size: 17px;
     }
-    &__box{
-      width: 439px;
-      height: 150px;
-      margin: auto;
-      border: 2px solid grey;
+    &--box{
+      width: 100%;
+      height: auto;
+      padding: 10px;
+      
+      .comment-each{
+        margin: 30px 20px 30px 20px;
+        &__who{
+          display: flex;
+          justify-content: space-between;
+          &--name{
+            font-size: 17px;
+            .userimage{
+              border-radius: 50%;
+            }
+            a{
+              color: blue;
+            }
+          }
+          &--time{
+            font-size: 15px;
+          }
+          
+        }
+        &__what{
+          margin: 5px 40px;
+
+        }
+      }
     }
   }
 }

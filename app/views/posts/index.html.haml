@@ -1,4 +1,4 @@
-%p  みんなの文字
+%p みんなの文字
 .index
   -@post.each do |post|
     .index-box
@@ -11,9 +11,16 @@
           .index-contents__definition
             意味:
             =post.definition
-          .index-contents__like
-            %i.fas.fa-heart.my-red
-            =post.liked_users.count
+          .index-contents__detail
+            .index-contents__detail--user
+              =link_to user_path(post.user_id) do
+                =image_tag post.user.image.url, class:'profilepic', size:"30x30"
+                =post.user.nickname
+            .index-contents__detail--stats
+              %i.far.fa-eye
+              =post.impressions_count
+              %i.fas.fa-heart.my-red
+              =post.liked_users.count
           .index-contents__time
             =post.created_at.strftime("%Y年%m月%d日")
   -unless params[:tag]
