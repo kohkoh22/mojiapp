@@ -10,8 +10,6 @@ class PostsController < ApplicationController
     end
     @posts = Post.order(impressions_count: 'DESC')
     @postss = Post.all.sort {|a,b| b.liked_users.count <=> a.liked_users.count}
-
-
   end
 
   def new
