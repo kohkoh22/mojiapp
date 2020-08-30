@@ -1,5 +1,25 @@
-プロフィール編集
-= form_with model: @user do |form|
-  = form.text_field :nickname
-  = form.submit "保存"
-  
+.register
+  .register__title
+    %i.fas.fa-user.fa-2x
+    %h3 新規登録
+  = form_with model: @user, class: 'new_user',local:true do |f|
+    .field
+      = f.label :ニックネーム
+      %br/
+      = f.text_field :nickname, autofocus: true
+      - if @user.errors.include?(:nickname)
+        .formpart__error
+          %h6{:style => "color: red;"}
+            = @user.errors.full_messages_for(:nickname).first
+
+    .field
+      = f.label :プロフィール画像
+      %br/
+      = f.file_field :image, class: 'postformwhat', placeholder: '写真のURLを入力'
+        - if @user.errors.include?(:image)
+        .formpart__error
+          %h6{:style => "color: red;"}
+            = @user.errors.full_messages_for(:image).first
+    .field
+      = f.submit "編集する", class:"submitbtn"
+    

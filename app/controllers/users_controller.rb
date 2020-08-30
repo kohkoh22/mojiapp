@@ -46,6 +46,6 @@ end
 
   private
   def user_params
-    params.fetch(:user, {}).permit(:nickname, :image)
+    params.fetch(:user, {}).permit(:nickname, :image, :profile)
   end
 end
