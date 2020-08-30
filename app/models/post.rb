@@ -12,11 +12,11 @@ class Post < ApplicationRecord
   end
   validates :vocab, length: { maximum: 40 }
   def previous
-    user.posts.order('created_at desc, id desc').where('created_at <= ? and id < ?', created_at, id).first
+    Post.order('created_at desc, id desc').where('created_at <= ? and id < ?', created_at, id).first
   end
 
   def next
-    user.posts.order('created_at desc, id desc').where('created_at >= ? and id > ?', created_at, id).reverse.first
+    Post.order('created_at desc, id desc').where('created_at >= ? and id > ?', created_at, id).reverse.first
   end
 
   def self.search(search)
