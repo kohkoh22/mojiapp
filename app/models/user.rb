@@ -13,6 +13,13 @@ class User < ApplicationRecord
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy # フォロワー取得
   has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
   has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
+  
+  [:nickname, :email, :image, :password].each do |v|
+    validates v, presence: true
+  end
+  validates :nickname, uniqueness: true
+  validates :nickname, length: { maximum: 8 }
+
   def already_liked?(post)
     self.likes.exists?(post_id: post.id)
   end

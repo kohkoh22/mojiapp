@@ -8,27 +8,48 @@
         .formpart
           %li
             = f.label :"言葉"
+            %span 必須
           %li
             = f.text_field :vocab, class: 'postformwhat', placeholder:'言葉、又はフレーズを入力'
+            - if @post.errors.include?(:vocab)
+              .formpart__error
+                %h6{:style => "color: red;"}
+                  = @post.errors.full_messages_for(:vocab).first
         .formpart
           %li
             = f.label :"意味"
+            %span 必須
           %li
             = f.text_area :definition, class: 'postformwhat'
+            - if @post.errors.include?(:definition)
+              .formpart__error
+                %h6{:style => "color: red;"}
+                  = @post.errors.full_messages_for(:definition).first
         .formpart  
           %li
             = f.label :"例文"
+            %span 必須
           %li
             = f.text_area :example, class: 'postformwhat'
+            - if @post.errors.include?(:example)
+              .formpart__error
+                %h6{:style => "color: red;"}
+                  = @post.errors.full_messages_for(:example).first
         .formpart  
           %li
             =f.label :画像を選択
+            %span 必須
             = f.label :image, class:"filelabel" do
               %i.fas.fa-image.fa-lg
               = f.file_field :image, class: 'image-post'
+            - if @post.errors.include?(:image)
+              .formpart__error
+                %h6{:style => "color: red;"}
+                  = @post.errors.full_messages_for(:image).first
         .formpart  
           %li
             = f.label :"タグ( ,で分てください)"
+            %span 任意
           %li
             = f.text_field :tag_list, class: 'postformwhat', placeholder: '不思議, あるある'
         .formpart

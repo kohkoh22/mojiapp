@@ -28,6 +28,14 @@
       width: auto;
       height: auto;
       margin-left: 60px;
+      &__error{
+        p{
+          font-size:15px;
+        }
+      }
+      span{
+        color: red;
+      }
     }
     input{
       border-style: none;

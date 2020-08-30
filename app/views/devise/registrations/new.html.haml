@@ -3,21 +3,34 @@
     %i.fas.fa-user.fa-2x
     %h3 新規登録
   = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
-    = render "devise/shared/error_messages", resource: resource
     .field
       = f.label :ニックネーム
+      %span 必須
       %br/
       = f.text_field :nickname, autofocus: true
+      - if @user.errors.include?(:nickname)
+        .formpart__error
+          %h6{:style => "color: red;"}
+            = @user.errors.full_messages_for(:nickname).first
 
     .field
       = f.label :プロフィール画像
+      %span 必須
       %br/
       = f.file_field :image, class: 'postformwhat', placeholder: '写真のURLを入力'
-      
+      - if @user.errors.include?(:image)
+        .formpart__error
+          %h6{:style => "color: red;"}
+            = @user.errors.full_messages_for(:image).first
     .field
       = f.label :email
+      %span 必須
       %br/
       = f.email_field :email, autofocus: true, autocomplete: "email"
+      - if @user.errors.include?(:email)
+        .formpart__error
+          %h6{:style => "color: red;"}
+            = @user.errors.full_messages_for(:email).first
     - if @sns_id.present?
       = hidden_field_tag :sns_auth, true
     - else
@@ -28,10 +41,18 @@
             (#{@minimum_password_length} characters minimum)
         %br/
         = f.password_field :password, autocomplete: "new-password"
+        - if @user.errors.include?(:password)
+          .formpart__error
+            %h6{:style => "color: red;"}
+              = @user.errors.full_messages_for(:password).first
       .field
         = f.label :password_confirmation
         %br/
         = f.password_field :password_confirmation, autocomplete: "new-password"
+        - if @user.errors.include?(:password)
+          .formpart__error
+            %h6{:style => "color: red;"}
+              = @user.errors.full_messages_for(:password).first
     .field
       = f.submit "新規登録", class:"submitbtn"
     .field
