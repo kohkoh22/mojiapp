@@ -1,3 +1,11 @@
-= link_to "新規登録", new_user_registration_path, class: "post"
-= link_to 'Facebookで登録', user_facebook_omniauth_authorize_path, method: :post
-= link_to 'Googleで登録', user_google_oauth2_omniauth_authorize_path, method: :post
+.how-to-login
+  %ul
+    ログイン
+    %li
+      = link_to  new_user_registration_path, class: "how-to-login__mail" do
+        %i.fas.fa-envelope
+        新規登録
+    %li
+      = link_to 'Facebookで登録', user_facebook_omniauth_authorize_path, method: :post, class: "how-to-login__facebook"
+    %li
+      = link_to 'Googleで登録', user_google_oauth2_omniauth_authorize_path, method: :post, class: "how-to-login__google"

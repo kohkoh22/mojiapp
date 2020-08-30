@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     if params[:tag]
       @post = Post.tagged_with(params[:tag])
     else
-        @post = Post.page(params[:page]).per(6).order("created_at DESC")
+      @post = Post.page(params[:page]).per(9).order("created_at DESC")
     end
     @posts = Post.order(impressions_count: 'DESC')
     @postss = Post.all.sort {|a,b| b.liked_users.count <=> a.liked_users.count}

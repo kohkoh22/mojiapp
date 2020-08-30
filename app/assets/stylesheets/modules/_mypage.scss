@@ -4,22 +4,29 @@
   &__profile{
     margin: auto;
     height: 160px;
-    width: 80%;
-    background-color: #F5F5F5;
-    border:transparent solid 2px;
+    width: 100%;
+    background-color: white;
+    border-bottom:lightgrey solid 2px;
     border-radius: 3px;
     display: flex;
     position: relative;
     &--name{
       font-size: 30px;
       margin: auto 40px;
+      .follow-function{
+        font-size: 15px;
+        padding: 7px;
+        background-color: lightblue;
+        color: black;
+        border-radius: 4px;
+      }
     }
     &--edit{
       width: auto;
       height: auto;
       position: absolute;
       bottom: 0;
-      right: 0;
+      right: 50px;
       border: 1px solid transparent;
       border-radius: 30px;
       padding: 3px 30px;
@@ -33,7 +40,7 @@
     &--image{
       position: absolute;
       top: 90px;
-      right: 450px;
+      left: 250px;
       .userimage{
         border-radius: 50%;
         background-position: center center;
@@ -46,6 +53,10 @@
       top: 42px;
       right: 100px;
       text-align: center;
+      a{
+        text-decoration: none;
+        color: black;
+      }
       .follower, .followed, .number-of-posts{
         margin-left: 30px;
       }
@@ -55,9 +66,9 @@
   &__more{
     margin: auto;
     height: 160px;
-    width: 80%;
-    background-color: lightsteelblue;
-    border:transparent solid 2px;
+    width: 100%;
+    background-color: white;
+    border-bottom:lightgrey solid 2px;
     border-radius: 3px;
   }
   &__posts{

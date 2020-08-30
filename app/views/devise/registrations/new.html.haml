@@ -1,34 +1,38 @@
-%h2 Sign up
-= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :ニックネーム
-    %br/
-    = f.text_field :nickname, autofocus: true
+.register
+  .register__title
+    %i.fas.fa-user.fa-2x
+    %h3 新規登録
+  = form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .field
+      = f.label :ニックネーム
+      %br/
+      = f.text_field :nickname, autofocus: true
 
-  .field
-    = f.label :プロフィール画像
-    %br/
-    = f.file_field :image, class: 'postformwhat', placeholder: '写真のURLを入力'
-    
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if @sns_id.present?
-    = hidden_field_tag :sns_auth, true
-  - else
     .field
-      = f.label :password
-      - if @minimum_password_length
-        %em
-          (#{@minimum_password_length} characters minimum)
+      = f.label :プロフィール画像
       %br/
-      = f.password_field :password, autocomplete: "new-password"
+      = f.file_field :image, class: 'postformwhat', placeholder: '写真のURLを入力'
+      
     .field
-      = f.label :password_confirmation
+      = f.label :email
       %br/
-      = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+      = f.email_field :email, autofocus: true, autocomplete: "email"
+    - if @sns_id.present?
+      = hidden_field_tag :sns_auth, true
+    - else
+      .field
+        = f.label :password
+        - if @minimum_password_length
+          %em
+            (#{@minimum_password_length} characters minimum)
+        %br/
+        = f.password_field :password, autocomplete: "new-password"
+      .field
+        = f.label :password_confirmation
+        %br/
+        = f.password_field :password_confirmation, autocomplete: "new-password"
+    .field
+      = f.submit "新規登録", class:"submitbtn"
+    .field
+      = render "devise/shared/links"

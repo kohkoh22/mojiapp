@@ -1,19 +1,24 @@
-%h2 Log in
-= form_with model: @user, url: user_session_path, id: 'new_user', class: 'new_user', local: true do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
+.register
+  .register__title
+    %i.fas.fa-user.fa-2x
+    %h3 ログイン
+  = form_with model: @user, url: user_session_path, id: 'new_user', class: 'new_user', local: true do |f|
     .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  = link_to 'Facebookでログイン', user_facebook_omniauth_authorize_path, method: :post
-  = link_to 'Googleでログイン', user_google_oauth2_omniauth_authorize_path, method: :post
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email"
+    .field
+      = f.label :password
+      %br/
+      = f.password_field :password, autocomplete: "current-password"
+    - if devise_mapping.rememberable?
+      .field
+        = f.check_box :remember_me
+        = f.label :remember_me
+    = link_to 'Facebookでログイン', user_facebook_omniauth_authorize_path, method: :post
+    = link_to 'Googleでログイン', user_google_oauth2_omniauth_authorize_path, method: :post
+    .field
+      = f.submit "Log in"
+    .field
+      = render "devise/shared/links"
+

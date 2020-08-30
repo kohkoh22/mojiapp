@@ -1,6 +1,9 @@
 .form
-  =form_with model: @post, class:"postformcontents", local: true do |f|
-    .platform__input
+  =form_with model: @post, class:"postform", local: true do |f|
+    .form__title
+      %i.fas.fa-feather.fa-3x
+      %h3 文字る
+    .form__input
       %ul
         .formpart
           %li
@@ -11,22 +14,23 @@
           %li
             = f.label :"意味"
           %li
-            = f.text_area :definition, class: 'postformwhat', placeholder:'意味を入力'
+            = f.text_area :definition, class: 'postformwhat'
         .formpart  
           %li
             = f.label :"例文"
           %li
-            = f.text_area :example, class: 'postformwhat', placeholder:'例を入力'
+            = f.text_area :example, class: 'postformwhat'
         .formpart  
           %li
-            = f.label :"画像"
-          %li
-            = f.file_field :image, class: 'postformwhat', placeholder: '写真のURLを入力'
+            =f.label :画像を選択
+            = f.label :image, class:"filelabel" do
+              %i.fas.fa-image.fa-lg
+              = f.file_field :image, class: 'image-post'
         .formpart  
           %li
-            = f.label :"タグ( 、で分てください)"
+            = f.label :"タグ( ,で分てください)"
           %li
-            = f.text_field :tag_list, class: 'postformwhat', placeholder: 'iamge, ok'
+            = f.text_field :tag_list, class: 'postformwhat', placeholder: '不思議, あるある'
         .formpart
           %li
             = f.submit '投稿する', class: 'postformbtn'

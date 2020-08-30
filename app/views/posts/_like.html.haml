@@ -1,6 +1,8 @@
 .impression-box
+  %p
   .impression-title
-    %i.fas.fa-crown
+    %i.fas.fa-crown.my-gold
+    %i.fas.fa-heart.my-red
     %h3 いいねランキング
   .impression-ranking
     -@postss.first(10).each.with_index(1) do |post, index|
@@ -17,7 +19,7 @@
             .impression__contents--definition
               =post.definition
             .impression__contents--numbers
-              閲覧数
-              =post.impressions_count
+              %i.fas.fa-heart.my-red
+              =post.liked_users.count
             .impression__contents--time
               =post.created_at.strftime("%Y年%m月%d日 %H時%M分")

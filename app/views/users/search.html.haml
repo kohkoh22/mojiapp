@@ -1,4 +1,5 @@
 .userindex
+  %i.fas.fa-users.fa-3x
   .search-user
     = form_with(url: search_users_path, local: true, method: :get, class: "search-form") do |form|
       = form.text_field :keyword, placeholder: "ユーザーを検索する", class: "search-input"
@@ -9,9 +10,25 @@
         %tr
           %th
             =link_to user_path(user.id) do
+              -if user.image.url
+                =image_tag user.image.url, class: 'userimage', size: "40x40"
               =user.nickname
           %td
             -if current_user.following?(user)
               = link_to 'フォロー外す', unfollow_path(user.id), method: :POST
             -else
               = link_to 'フォローする', follow_path(user.id), method: :POST
+            .number-of-posts
+              =user.posts.count
+              %br/
+              %i.fas.fa-pencil-alt
+            .follower
+              = link_to following_user_path(user) do
+                =user.followed.count
+                %br/
+                フォロワー
+            .followed
+              =link_to followers_user_path(user) do
+                =user.follower.count
+                %br/
+                フォロー
