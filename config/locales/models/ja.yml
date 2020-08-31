@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      post: 投稿
+    attributes:
+      post:
+        vocab: "言葉"
+        definition: "意味"
+        example: "例文"
+        image: "画像"
+    
