@@ -3,7 +3,7 @@
 lock "~> 3.14.1"
 
 # Capistranoのログの表示に利用する
-set :application, 'mojiru'
+set :application, 'mojiapp'
 
 # どのリポジトリからアプリをpullするかを指定する
 set :repo_url,  'git@github.com:kohkoh22/mojiapp.git'
