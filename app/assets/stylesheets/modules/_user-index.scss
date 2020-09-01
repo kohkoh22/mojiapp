@@ -7,26 +7,33 @@
     margin: 50px 550px;
     display: flex;
   }
+  h6{
+    text-align: center;
+  }
   .user-list{
     margin: 30px auto;
     height: auto;
     width: 70%;
     font-size: 19px;
-    a{
-      text-decoration: none;
-      color: black;
+    text-align: center;
+    h5{
+      margin-bottom: 30px;
     }
     table{
       width: auto;
       margin: 30px auto;
+      text-align: start;
+      a{
+        color: black;
+      }
     }
     tr{
       padding: 300px;
+      border-top: 2px solid lightgrey;
+      border-bottom: 2px solid lightgrey;
     }
     th{
       width: 500px;
-      border-top: 2px solid lightgrey;
-      border-bottom: 2px solid lightgrey;
       border-right: none;
       padding: 10px;
       .userimage{
@@ -35,15 +42,32 @@
     }
     td{
       width: 400px;
-      border-top: 2px solid lightgrey;
-      border-bottom: 2px solid lightgrey;
+      height: 64px;
       border-left: none;
       padding: 10px;
       display: flex;
+      .likes{
+        width: 40%;
+        &__unfollow{
+          padding: 3px;
+          border-radius: 5px;
+          background-color: lightskyblue;
+        }
+        &__follow{
+          padding: 3px;
+          border-radius: 5px;
+          background-color: lightskyblue;
+        }
+        &__my{
+          i{
+            margin: 10% 30%;
+          }
+        }
+      }
       .follower, .followed, .number-of-posts{
         text-align: center;
         margin-left: 30px;
-        font-size: 15px;
+        font-size: 13px;
         i{
           margin: 0;
         }

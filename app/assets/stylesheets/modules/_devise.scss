@@ -3,7 +3,6 @@
   margin: auto;
   text-align: center;
   padding: 50px 0;
-
   ul{
     text-align: center;
     font-size: 20px;
@@ -23,11 +22,13 @@
     }
   }
   &__facebook{
-    border: 1px solid black;
     border-radius: 5px;
     padding: 7px 80px;
     background-color: #305097 ;
     color: white;
+    a{
+      text-decoration: none;
+    }
   }
   &__google{
     border: 1px solid black;
@@ -40,7 +41,6 @@
     }
   }
 }
-
 .register{
   width: 50%;
   margin: auto;
@@ -56,13 +56,47 @@
     margin: auto;
     .field{
       margin: 20px 100px;
-      .linkbtn{
-        width: 160px;
-        height: 40px;
-        margin: auto 100px;
+      &__facebook{
         border: 1px solid black;
-        padding: 7px 17px;
+        border-radius: 5px;
+        padding: 7px 80px;
+        background-color: #305097 ;
+        margin-bottom: 20px;
+        border: none;
+        a{
+          color: white;
+        }
+      }
+      &__google{
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 7px 90px;
         color: black;
+        background-color: whitesmoke;
+        a{
+          text-decoration: none;
+          color: black;
+        }
+      }
+      .linkbtn{
+        display: flex;
+        justify-content: center;
+        border: 1px solid lightgrey;
+        padding: 8px;
+        margin: auto auto;
+      }
+    }
+    .field-remember{
+      display: flex;
+      justify-content: start;
+      margin: auto;
+      padding: 0 100px;
+      input{
+        width: auto;
+        margin: auto 10px auto 0;
+      }
+      label{
+        margin: auto 0;
       }
     }
     input{

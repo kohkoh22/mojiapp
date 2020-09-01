@@ -12,7 +12,7 @@
             = index
             位
           .impression__image
-            =image_tag post.image.url, class: 'vocabimage', size: "250x250"
+            =image_tag post.image.url, class: 'vocabimage', size: "200x200"
           .impression__contents
             .impression__contents--vocab
               =post.vocab
@@ -22,4 +22,4 @@
               %i.fas.fa-heart.my-red
               =post.liked_users.count
             .impression__contents--time
-              =post.created_at.strftime("%Y年%m月%d日 %H時%M分")
+              =post.created_at.strftime("%Y年%m月%d日")
