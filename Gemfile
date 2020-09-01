@@ -73,3 +73,7 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 gem 'rails-i18n'
+
+group :production do
+  gem 'unicorn', '5.4.1'
+end
