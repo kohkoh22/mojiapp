@@ -4,6 +4,7 @@
     = form_with(url: search_users_path, local: true, method: :get, class: "search-form") do |form|
       = form.text_field :keyword, placeholder: "ユーザーを検索する", class: "search-input"
       = form.submit "検索", class: "search-btn"
+  %h6 ***フォロワー順***
   .user-list
     %table
       - @users.each do |user|
@@ -14,10 +15,16 @@
                 =image_tag user.image.url, class: 'userimage', size: "40x40"
               =user.nickname
           %td
-            -if current_user.following?(user)
-              = link_to 'フォロー外す', unfollow_path(user.id), method: :POST
-            -else
-              = link_to 'フォローする', follow_path(user.id), method: :POST
+            .likes
+              -unless user.id==current_user.id
+                -if current_user.following?(user)
+                  = link_to unfollow_path(user.id), method: :post, class:"likes__unfollow" do
+                    フォロー中
+                -else
+                  = link_to 'フォローする', follow_path(user.id), method: :post, class:"likes__follow"
+              -else
+                .likes__my
+                  %i.fas.fa-user
             .number-of-posts
               =user.posts.count
               %br/

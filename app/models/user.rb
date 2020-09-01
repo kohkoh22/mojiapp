@@ -9,10 +9,10 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :likes, source: :post
   has_many :sns_credentials
   mount_uploader :image, ImageUploader
-  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy # フォロー取得
-  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy # フォロワー取得
-  has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
-  has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy 
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy 
+  has_many :following_user, through: :follower, source: :followed 
+  has_many :follower_user, through: :followed, source: :follower 
   
   [:nickname, :email, :image, :password].each do |v|
     validates v, presence: true
@@ -27,13 +27,11 @@ class User < ApplicationRecord
   def follow(user_id)
     follower.create(followed_id: user_id)
   end
-  
-  # ユーザーのフォローを外す
+
   def unfollow(user_id)
     follower.find_by(followed_id: user_id).destroy
   end
   
-  # フォローしていればtrueを返す
   def following?(user)
     following_user.include?(user)
   end
@@ -50,13 +48,10 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     sns = SnsCredential.where(provider: auth.provider, uid: auth.uid).first_or_create
-    # sns認証したことがあればアソシエーションで取得
-    # 無ければemailでユーザー検索して取得orビルド(保存はしない)
     user = sns.user || User.where(email: auth.info.email).first_or_initialize(
       nickname: auth.info.name,
         email: auth.info.email
     )
-    # userが登録済みの場合はそのままログインの処理へ行くので、ここでsnsのuser_idを更新しておく
     if user.persisted?
       sns.user = user
       sns.save

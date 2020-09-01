@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
     if params[:sns_auth] == 'true'
