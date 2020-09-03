@@ -3,138 +3,131 @@
 
 # 概要 Description
 * 文字を作ってシェア出来る投稿サイト
-* 
-* 4人チームでアジャイル開発を行った。
-# 制作背景 Making background
-* FURIMAによる課題解決
-* ユーザー同士で物をオンラインで売買出来る。
-* オンラインで行えるのでお店に持ち込む手間がなくなる。
-* uxを意識して、操作性を重視した。
-
-# 環境条件 Requirement/gem
-* Ruby'2.6.5'
-* Rails'~> 6.0.0'
-
-## 説明 Features
-* haml/SASS記法と、命名規則BEMを使ったマークアップ
-* SNS認証による新規登録、ログイン
-* pay.jpによる購入処理クレジットカード登録
-* カテゴリー表示、コメント、ajaxを使用した非同期処理
-* RSpecを使った単体テスト
-* お気に入り登録
-
-# 本番環境
-* 本番環境のIPアドレス
-  http://54.248.73.192/
-* basic認証のID、パスワード
-  ID:adminuser
-  PW:passwordhogehoge
+* 言葉、意味、例文、それに関してのイメージを含む投稿
 
 # 使用技術
 * Haml
 * Saas
 * Git(GitHub)
-* Jquery
 * Ruby
 * Ruby on Rails
 * JavaScript
-* AWS(EC2/S3)
+* AWS(EC2)
 * RSpec
 
-# 課題や今後実装したい機能
-* お気に入り登録の非同期化
+# 環境条件 Requirement/gem
+* Ruby'2.6.5'
+* Rails'~> 6.0.0'
+
+# 説明 Features
+## 基礎機能
+* haml/SASS記法と、命名規則BEMを使ったマークアップ
+* ログイン
+* 投稿機能
+* 投稿閲覧機能
+* 投稿編集/消去機能
+## 追加機能
+* 投稿検索機能
+* ユーザー検索機能
+* SNS認証による新規登録
+* twitterシェア機能
+* 閲覧数取得機能
+* 閲覧数順表示機能
+* いいね機能
+* いいね順表示機能
+* ページネーション機能(bootstrap)
+* コメント機能
+* タグ機能
 * フォロー機能
-* カテゴリー別検索機能
-* パンくず
+* フォロワー/フォロー表示機能
+* 投稿詳細ページの前と次の詳細ページへ遷移のリンク付け
+* RSpecを使った単体テスト
+
+
+# 本番環境
+* 本番環境のIPアドレス
+  http://54.95.247.118/
+* テスト用ログイン情報
+- email :aaa@aaa.com
+- password :aaaaaa
+
+# 課題や今後実装したい機能
+* いいね/コメント/投稿消去,検索などの非同期化
+* プレビュー機能
+* タイムライン機能
+* 通知機能
+* admin機能
+* 問い合わせ機能
+* 動画投稿機能
+* パスワードリセット機能
+* dockerでの環境構築
+* レスポンシブデザイン
 
 # フリマ DB設計
 ## usersテーブル
 |Column|Type|Options|
 |------|----|-------|
 |nickname|string|null: false|
-|last_name|string|null:false|
-|first_name|string|null:false|
-|last_name_read|string|null:false|
-|first_name_read|string|null:false|
-|gender|integer|null:false|
-|birthday|date|null:false|
+|image|text|null:false|
 |email|string|null: false|
 |password|string|null: false|
 
 ### Association
-- has_many :items
+- has_many :posts
 - has_many :comments
-- has_many :cards
-- has_one :address
-
-## itemsテーブル
+- has_many :likes
+- has_many :liked_posts
+- has_many :sns_credentials
+- has_many :follower
+- has_many :followed
+- has_many :following_user
+- has_many :follower_user
+## postsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|name|string|null: false|
-|explanation|text|null: false|
-|quality|string|null: false|
-|delivery_cost|integer|null: false|
-|period|integer|null: false|
-|price|integer|null: false|
-|user|references|null: false, foreign_key: true|
-|category|references|null: false, foreign_key: true|
-|prefecture|references|null: false, foreign_key: true|
+|vocab|string|null: false|
+|definition|text|null: false|
+|example|text|null: false|
+|image|text|null:false|
+|user_id|integer|null: false|
+|impressions_count|integer|
 
 ### Association
 - belongs_to :user
 - has_many :comments
 - has_many :images
 - belongs_to :category
+- has_many :likes
+- has_many :liked_users,
 
-## cardsテーブル
+## likesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false|
-|customer_id|string|null: false|
-|card_id|string|null: false|
+|post|references|null: false|
+
 
 ### Association
 - belongs_to :user
+- belongs_to :post
 
 ## commentsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |text|text|null: false|
 |user|references|null: false, foreign_key: true|
-|item|references|null: false, foreign_key: true|
+|post|references|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :item
+- belongs_to :post
 - belongs_to :user
 
-## addressesテーブル
+## relationshipsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|postal_code|string|null:false|
-|prefecture_id|integer|null:false|
-|city|string|null:false|
-|house_number|string|null:false|
-|building_name|string|null:false|
-|phone_number|string|null:false|
-|user|references|null: false, foreign_key: true|
+|follower|references|null: false, foreign_key: true|
+|follwed|references|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :user
-
-## imagesテーブル
-|Column|Type|Options|
-|------|----|-------|
-|image|string|null:false|
-|item|references|null: false, foreign_key: true|
-
-### Association
-- belongs_to :item
-
-## categoriesテーブル
-|Column|Type|Options|
-|------|----|-------|
-|name|string|null:false|
-
-### Association
-- has_many :items
-
+- belongs_to :follower
+- belongs_to :followed
