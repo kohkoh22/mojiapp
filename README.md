@@ -5,20 +5,6 @@
 * 文字を作ってシェア出来る投稿サイト
 * 言葉、意味、例文、それに関してのイメージを含む投稿
 
-# 使用技術
-* Haml
-* Saas
-* Git(GitHub)
-* Ruby
-* Ruby on Rails
-* JavaScript
-* AWS(EC2)
-* RSpec
-
-# 環境条件 Requirement/gem
-* Ruby'2.6.5'
-* Rails'~> 6.0.0'
-
 # 説明 Features
 ## 基礎機能
 * haml/SASS記法と、命名規則BEMを使ったマークアップ
@@ -43,6 +29,18 @@
 * 投稿詳細ページの前と次の詳細ページへ遷移のリンク付け
 * RSpecを使った単体テスト
 
+# 使用技術
+* Haml
+* Saas
+* Git(GitHub)
+* Ruby
+* Ruby on Rails
+* AWS(EC2)
+* RSpec
+
+# 環境条件 Requirement/gem
+* Ruby'2.6.5'
+* Rails'~> 6.0.0'
 
 # 本番環境
 * 本番環境のIPアドレス
